@@ -1,16 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
 import { getClasses } from "./store/slicers/class.slice";
+import { getStudents } from "./store/slicers/student.slice";
 import { useDispatch, useSelector } from "react-redux";
-import { selectClasses, selectIsLoading } from "./store/slicers/class.slice";
+import {
+	selectClasses,
+	selectClassIsLoading,
+} from "./store/slicers/class.slice";
+import {
+	selectStudents,
+	selectStudentIsLoading,
+} from "./store/slicers/student.slice";
 
 function App() {
 	const dispatch = useDispatch();
 	const classes = useSelector(selectClasses);
-	const isLoading = useSelector(selectIsLoading);
+	const classIsLoading = useSelector(selectClassIsLoading);
+	const students = useSelector(selectStudents);
+	const studentIsLoading = useSelector(selectStudentIsLoading);
 
 	const handleGetClasses = () => {
 		dispatch(getClasses());
+		dispatch(getStudents());
 	};
 
 	return (
@@ -28,10 +39,10 @@ function App() {
 				>
 					Learn React
 				</a>
-				<button onClick={handleGetClasses} disabled={isLoading}>
+				<button onClick={handleGetClasses} disabled={classIsLoading}>
 					getClasses
 				</button>
-				{isLoading && <div>Loading...</div>}
+				{classIsLoading && <div>Loading...</div>}
 			</header>
 		</div>
 	);

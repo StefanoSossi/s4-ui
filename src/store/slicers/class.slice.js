@@ -125,7 +125,7 @@ const classSlice = createSlice({
 			})
 			.addCase(getClasses.rejected, (state, action) => {
 				state.isLoading = false;
-				state.error = action.payload;
+				state.error = action.payload.data;
 			})
 			.addCase(getClassById.pending, (state) => {
 				state.isLoading = true;
@@ -133,25 +133,27 @@ const classSlice = createSlice({
 			})
 			.addCase(getClassById.fulfilled, (state, action) => {
 				state.classes = state.classes.map((classItem) =>
-					classItem.id === action.payload.id ? action.payload : classItem
+					classItem.id === action.payload.data.id
+						? action.payload.data
+						: classItem
 				);
 				state.isLoading = false;
 			})
 			.addCase(getClassById.rejected, (state, action) => {
 				state.isLoading = false;
-				state.error = action.payload;
+				state.error = action.payload.data;
 			})
 			.addCase(createClass.pending, (state) => {
 				state.isLoading = true;
 				state.error = null;
 			})
 			.addCase(createClass.fulfilled, (state, action) => {
-				state.classes = [...state.classes, action.payload];
+				state.classes = [...state.classes, action.payload.data];
 				state.isLoading = false;
 			})
 			.addCase(createClass.rejected, (state, action) => {
 				state.isLoading = false;
-				state.error = action.payload;
+				state.error = action.payload.data;
 			})
 			.addCase(updateClass.pending, (state) => {
 				state.isLoading = true;
@@ -159,13 +161,15 @@ const classSlice = createSlice({
 			})
 			.addCase(updateClass.fulfilled, (state, action) => {
 				state.classes = state.classes.map((classItem) =>
-					classItem.id === action.payload.id ? action.payload : classItem
+					classItem.id === action.payload.data.id
+						? action.payload.data
+						: classItem
 				);
 				state.isLoading = false;
 			})
 			.addCase(updateClass.rejected, (state, action) => {
 				state.isLoading = false;
-				state.error = action.payload;
+				state.error = action.payload.data;
 			})
 			.addCase(deleteClass.pending, (state) => {
 				state.isLoading = true;
@@ -173,13 +177,13 @@ const classSlice = createSlice({
 			})
 			.addCase(deleteClass.fulfilled, (state, action) => {
 				state.classes = state.classes.filter(
-					(classItem) => classItem.id !== action.payload
+					(classItem) => classItem.id !== action.payload.data
 				);
 				state.isLoading = false;
 			})
 			.addCase(deleteClass.rejected, (state, action) => {
 				state.isLoading = false;
-				state.error = action.payload;
+				state.error = action.payload.data;
 			})
 			.addCase(addStudentToClass.pending, (state) => {
 				state.isLoading = true;
@@ -187,13 +191,15 @@ const classSlice = createSlice({
 			})
 			.addCase(addStudentToClass.fulfilled, (state, action) => {
 				state.classes = state.classes.map((classItem) =>
-					classItem.id === action.payload.id ? action.payload : classItem
+					classItem.id === action.payload.data.id
+						? action.payload.data
+						: classItem
 				);
 				state.isLoading = false;
 			})
 			.addCase(addStudentToClass.rejected, (state, action) => {
 				state.isLoading = false;
-				state.error = action.payload;
+				state.error = action.payload.data;
 			})
 			.addCase(removeStudentOfClass.pending, (state) => {
 				state.isLoading = true;
@@ -201,13 +207,15 @@ const classSlice = createSlice({
 			})
 			.addCase(removeStudentOfClass.fulfilled, (state, action) => {
 				state.classes = state.classes.map((classItem) =>
-					classItem.id === action.payload.id ? action.payload : classItem
+					classItem.id === action.payload.data.id
+						? action.payload.data
+						: classItem
 				);
 				state.isLoading = false;
 			})
 			.addCase(removeStudentOfClass.rejected, (state, action) => {
 				state.isLoading = false;
-				state.error = action.payload;
+				state.error = action.payload.data;
 			})
 			.addCase(getStudentsOfClass.pending, (state) => {
 				state.isLoading = true;
@@ -215,18 +223,18 @@ const classSlice = createSlice({
 			})
 			.addCase(getStudentsOfClass.fulfilled, (state, action) => {
 				var updatedClass = state.classes.find(
-					(classItem) => classItem.id === action.payload.classId
+					(classItem) => classItem.id === action.payload.data.classId
 				);
 				var allClasses = state.classes.filter(
-					(classItem) => classItem.id !== action.payload.classId
+					(classItem) => classItem.id !== action.payload.data.classId
 				);
-				updatedClass.students = action.payload.students;
+				updatedClass.students = action.payload.data.students;
 				state.classes = [...allClasses, updatedClass];
 				state.isLoading = false;
 			})
 			.addCase(getStudentsOfClass.rejected, (state, action) => {
 				state.isLoading = false;
-				state.error = action.payload;
+				state.error = action.payload.data;
 			})
 			.addDefaultCase((state, action) => {});
 	},
@@ -236,9 +244,10 @@ export const selectClassState = (state) => state.classItem;
 
 export const selectClasses = (state) => selectClassState(state).classes;
 
-export const selectIsLoading = (state) => selectClassState(state).isLoading;
+export const selectClassIsLoading = (state) =>
+	selectClassState(state).isLoading;
 
-export const selectError = (state) => selectClassState(state).error;
+export const selectClassError = (state) => selectClassState(state).error;
 
 export const selectClassById = (state, classId) =>
 	selectClasses(state).find((classItem) => classItem.id === classId);
