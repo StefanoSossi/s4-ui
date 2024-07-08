@@ -28,7 +28,7 @@ const initialState = {
 	error: null,
 };
 
-const categoryReducer = (state = initialState, action) => {
+const studentReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_STUDENTS:
 			return {
@@ -172,4 +172,4 @@ const categoryReducer = (state = initialState, action) => {
 	}
 };
 
-export default categoryReducer;
+export default studentReducer;
