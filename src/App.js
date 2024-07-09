@@ -1,49 +1,89 @@
-import logo from './logo.svg';
-import './App.css';
-import { getClasses } from "./store/slicers/class.slice";
-import { getStudents } from "./store/slicers/student.slice";
-import { useDispatch, useSelector } from "react-redux";
+import "./App.css";
+import { useState } from "react";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
 import {
-	selectClasses,
-	selectClassIsLoading,
-} from "./store/slicers/class.slice";
-import {
-	selectStudents,
-	selectStudentIsLoading,
-} from "./store/slicers/student.slice";
+	BrowserRouter as Router,
+	Route,
+	Routes,
+	Link,
+	useLocation,
+	Navigate,
+} from "react-router-dom";
+import ClassesComponent from "./components/Classes/classes.component";
+import StudentsComponent from "./components/Students/students.component";
+import HeaderComponent from "./components/Header/header.component";
+
+function samePageLinkNavigation(event) {
+	if (
+		event.defaultPrevented ||
+		event.button !== 0 ||
+		event.metaKey ||
+		event.ctrlKey ||
+		event.altKey ||
+		event.shiftKey
+	) {
+		return false;
+	}
+	return true;
+}
+
+function LinkTab(props) {
+	return <Tab component={Link} to={props.href} {...props} />;
+}
 
 function App() {
-	const dispatch = useDispatch();
-	const classes = useSelector(selectClasses);
-	const classIsLoading = useSelector(selectClassIsLoading);
-	const students = useSelector(selectStudents);
-	const studentIsLoading = useSelector(selectStudentIsLoading);
+	const [value, setValue] = useState(0);
+	const location = useLocation();
+	const [searchQuery, setSearchQuery] = useState("");
 
-	const handleGetClasses = () => {
-		dispatch(getClasses());
-		dispatch(getStudents());
+	const handleSearch = (query) => {
+		setSearchQuery(query);
+	};
+
+	const handleChange = (event, newValue) => {
+		if (
+			event.type !== "click" ||
+			(event.type === "click" && samePageLinkNavigation(event))
+		) {
+			setValue(newValue);
+		}
 	};
 
 	return (
 		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
+			<HeaderComponent onSearch={handleSearch}></HeaderComponent>
+			<Box className="table-box">
+				<Tabs
+					value={value}
+					onChange={handleChange}
+					aria-label="S4"
+					role="navigation"
 				>
-					Learn React
-				</a>
-				<button onClick={handleGetClasses} disabled={classIsLoading}>
-					getClasses
-				</button>
-				{classIsLoading && <div>Loading...</div>}
-			</header>
+					<LinkTab
+						label="Students"
+						href="/students"
+						selected={location.pathname === "/students"}
+					/>
+					<LinkTab
+						label="Classes"
+						href="/classes"
+						selected={location.pathname === "/classes"}
+					/>
+				</Tabs>
+			</Box>
+			<Routes>
+				<Route path="/" element={<Navigate to="/students" />} />
+				<Route
+					path="/students"
+					element={<StudentsComponent searchQuery={searchQuery} />}
+				/>
+				<Route
+					path="/classes"
+					element={<ClassesComponent searchQuery={searchQuery} />}
+				/>
+			</Routes>
 		</div>
 	);
 }
