@@ -1,3 +1,4 @@
+import "./students.style.css";
 import { getStudents } from "../../store/slicers/student.slice";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -5,6 +6,8 @@ import {
 	selectStudentIsLoading,
 } from "../../store/slicers/student.slice";
 import React, { useEffect, useState } from "react";
+import RowStudentComponent from "../RowStudent/row.student.component";
+import Typography from "@mui/material/Typography";
 
 function StudentsComponent({ searchQuery }) {
 	const dispatch = useDispatch();
@@ -28,17 +31,36 @@ function StudentsComponent({ searchQuery }) {
 	}, [students, searchQuery]);
 
 	return (
-		<div className="Students">
+		<div className="students">
+			<div className="student-header">
+				<div className="avatar"></div>
+				<div className="name">
+					<Typography variant="body1" component="div">
+						Full Name
+					</Typography>
+				</div>
+				<div className="classes">
+					<Typography variant="body1" component="div">
+						Classes
+					</Typography>
+				</div>
+				<div className="actions">
+					<Typography variant="body1" component="div">
+						Actions
+					</Typography>
+				</div>
+			</div>
 			{studentIsLoading ? (
 				<p>Loading students...</p>
 			) : (
-				<ul>
+				<>
 					{filteredStudents.map((student) => (
-						<li key={student.id}>
-							{student.firstName} {student.lastName}{" "}
-						</li>
+						<RowStudentComponent
+							student={student}
+							key={student.id}
+						></RowStudentComponent>
 					))}
-				</ul>
+				</>
 			)}
 		</div>
 	);

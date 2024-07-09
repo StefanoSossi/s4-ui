@@ -250,4 +250,8 @@ export const selectClassError = (state) => selectClassState(state).error;
 export const selectClassById = (state, classId) =>
 	selectClasses(state).find((classItem) => classItem.id === classId);
 
+export const selectClassesByStudentId = (state, studentId) =>
+	selectClasses(state).filter((classItem) =>
+		classItem.students.some((student) => student.id === studentId)
+	);
 export default classSlice.reducer;
