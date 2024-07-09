@@ -13,7 +13,6 @@ const initialState = {
 export const getClasses = createAsyncThunk("class/getClasses", async () => {
 	try {
 		const response = await axios.get(API_URL);
-		console.log("classes ", response.data);
 		return response.data;
 	} catch (error) {
 		throw error;
@@ -119,7 +118,6 @@ const classSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(getClasses.fulfilled, (state, action) => {
-				console.log("action", action.payload.data);
 				state.classes = action.payload.data;
 				state.isLoading = false;
 			})
