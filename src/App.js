@@ -33,6 +33,18 @@ function LinkTab(props) {
 	return <Tab component={Link} to={props.href} {...props} />;
 }
 
+const tabStyles = {
+	"& .MuiTabs-indicator": {
+		backgroundColor: "black !important",
+	},
+	"& .MuiTab-root": {
+		color: "#39423e !important",
+	},
+	"& .Mui-selected": {
+		color: "black !important",
+	},
+};
+
 function App() {
 	const [value, setValue] = useState(0);
 	const location = useLocation();
@@ -60,6 +72,7 @@ function App() {
 					onChange={handleChange}
 					aria-label="S4"
 					role="navigation"
+					sx={tabStyles}
 				>
 					<LinkTab
 						label="Students"

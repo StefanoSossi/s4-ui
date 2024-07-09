@@ -66,7 +66,7 @@ function RowStudentComponent({ student }) {
 					{fullName}
 				</Typography>
 			</div>
-			<div className="classes">
+			<div className="classes-number">
 				<Typography variant="body1" component="div">
 					{classes.length}
 				</Typography>

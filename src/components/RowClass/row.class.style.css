@@ -1,4 +1,4 @@
-.student-row{
+.class-row{
     background: #39423e13;
     padding: 1rem;
     display: flex;
@@ -8,18 +8,20 @@
     border-bottom: 1px solid #39423e;
 }
 
-.avatar{
-    flex: 0.5;
+.class-code{
+    flex: 1;
 }
-.name{
-    flex: 2;
+.class-title{
+    flex: 1;
     text-align: start;
 }
-.classes-number{
-    flex: 1;
-
+.class-description{
+    flex: 2;
 }
-.actions{
+.class-students-number{
+    flex: 1;
+}
+.class-actions{
     flex: 2;
     display: flex;
     justify-content: space-evenly;

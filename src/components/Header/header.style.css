@@ -26,7 +26,7 @@
   }
   
   .search-input{
-    color: white;
+    color: white !important;
     width: 100%;
     border-radius: 4px;
   }

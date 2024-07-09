@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { environment } from "../../environments/environment";
 import axios from "axios";
+import { createSelector } from "reselect";
 
 const API_URL = `${environment.S4_API}/api/Classes`;
 const initialState = {
@@ -240,18 +241,32 @@ const classSlice = createSlice({
 
 export const selectClassState = (state) => state.classItem;
 
-export const selectClasses = (state) => selectClassState(state).classes;
+export const selectClasses = createSelector(
+	[selectClassState],
+	(classState) => classState.classes
+);
 
-export const selectClassIsLoading = (state) =>
-	selectClassState(state).isLoading;
+export const selectClassIsLoading = createSelector(
+	[selectClassState],
+	(classState) => classState.isLoading
+);
 
-export const selectClassError = (state) => selectClassState(state).error;
+export const selectClassError = createSelector(
+	[selectClassState],
+	(classState) => classState.error
+);
 
-export const selectClassById = (state, classId) =>
-	selectClasses(state).find((classItem) => classItem.id === classId);
+export const selectClassById = createSelector(
+	[selectClasses, (state, classId) => classId],
+	(classes, classId) => classes.find((classItem) => classItem.id === classId)
+);
 
-export const selectClassesByStudentId = (state, studentId) =>
-	selectClasses(state).filter((classItem) =>
-		classItem.students.some((student) => student.id === studentId)
-	);
+export const selectClassesByStudentId = createSelector(
+	[selectClasses, (state, studentId) => studentId],
+	(classes, studentId) =>
+		classes.filter((classItem) =>
+			classItem.students?.some((student) => student.id === studentId)
+		)
+);
+  
 export default classSlice.reducer;

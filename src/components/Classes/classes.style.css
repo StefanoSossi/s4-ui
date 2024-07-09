@@ -1,10 +1,10 @@
-.students{
+.classes{
     margin: 0.5rem 2rem 2rem;
     background: #39423e4a;
     padding: 1rem;
 }
 
-.student-header{
+.class-header{
     background: #39423e;
     padding: 1rem;
     color: white;
@@ -15,17 +15,23 @@
     border-radius: 0.5rem;
 }
 
-.avatar{
-    flex: 0.5;
+.class-code{
+    flex: 1;
+    text-align: start;
 }
-.name{
+.class-title{
+    flex: 1;
+    text-align: start;
+}
+.class-students-number{
+    flex: 1;
+
+}
+.class-description{
     flex: 2;
     text-align: start;
 }
-.classes-number{
-    flex: 1;
-}
-.actions{
+.class-actions{
     flex: 2;
     display: flex;
     justify-content: space-evenly;

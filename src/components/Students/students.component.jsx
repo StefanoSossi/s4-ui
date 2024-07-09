@@ -39,7 +39,7 @@ function StudentsComponent({ searchQuery }) {
 						Full Name
 					</Typography>
 				</div>
-				<div className="classes">
+				<div className="classes-number">
 					<Typography variant="body1" component="div">
 						Classes
 					</Typography>
