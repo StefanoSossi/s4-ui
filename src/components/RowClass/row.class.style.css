@@ -26,3 +26,12 @@
     display: flex;
     justify-content: space-evenly;
 }
+
+.class-expanded-row{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-items: start;
+    padding: 1rem;
+    background-color: #ffffff70;
+    border-radius: 1rem;
+}
