@@ -25,7 +25,7 @@ function HeaderComponent({ onSearch }) {
 				</div>
 				<InputBase
 					className="search-input"
-					placeholder="Search a Class or Student"
+					placeholder="Type a Class or Student..."
 					inputProps={{ "aria-label": "search" }}
 					value={searchInput}
 					onChange={handleSearchChange}

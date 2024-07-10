@@ -24,3 +24,14 @@
     display: flex;
     justify-content: space-evenly;
 }
+
+.student-expanded-row{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1.5fr));
+    gap: 0.5rem;
+    justify-items: center;
+    align-items: center;
+    padding: 1rem;
+    background-color: #ffffff70;
+    border-radius: 1rem;
+}

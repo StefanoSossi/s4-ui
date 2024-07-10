@@ -6,5 +6,31 @@
   margin: 2rem 2rem 0 2rem;
   border-radius: 0.5rem;
   background: #39423e13;
+  display: flex;
+  justify-content: space-between;
 }
 
+.add-new-item-button{
+  border-radius: 3rem;
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+
+.add-new-button{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 2rem;
+  cursor: pointer;
+  padding-right: 0.5rem;
+  margin-right: 5rem;
+}
+
+.add-new-button:hover{
+  background-color: #ffffff70;
+}

@@ -8,12 +8,17 @@ import {
 import React, { useEffect, useState } from "react";
 import RowStudentComponent from "../RowStudent/row.student.component";
 import Typography from "@mui/material/Typography";
+import PersonAddAlt1TwoToneIcon from "@mui/icons-material/PersonAddAlt1TwoTone";
+import Fab from "@mui/material/Fab";
+import Tooltip from "@mui/material/Tooltip";
+import CreateStudentModalComponent from "../CreateModal/Student/create.student.modal";
 
 function StudentsComponent({ searchQuery }) {
 	const dispatch = useDispatch();
 	const students = useSelector(selectStudents);
 	const studentIsLoading = useSelector(selectStudentIsLoading);
 	const [filteredStudents, setFilteredStudents] = useState([]);
+	const [open, setOpen] = useState(false);
 
 	useEffect(() => {
 		dispatch(getStudents());
@@ -62,6 +67,20 @@ function StudentsComponent({ searchQuery }) {
 					))}
 				</>
 			)}
+			<Tooltip title="Add new Student">
+				<Fab
+					sx={{ color: "#367225 !important" }}
+					aria-label="add student"
+					className="add-button-new-student"
+					onClick={() => setOpen(true)}
+				>
+					<PersonAddAlt1TwoToneIcon />
+				</Fab>
+			</Tooltip>
+			<CreateStudentModalComponent
+				open={open}
+				handleClose={() => setOpen(false)}
+			></CreateStudentModalComponent>
 		</div>
 	);
 }

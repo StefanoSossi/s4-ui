@@ -9,6 +9,8 @@ import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import ClassItemComponent from "../ClassItem/class.item.component";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
 
 const SATURATION = 65;
 const getColorFromString = (string = "") => {
@@ -74,13 +76,28 @@ function RowStudentComponent({ student }) {
 					</Typography>
 				</div>
 				<div className="actions">
-					<VisibilityTwoToneIcon onClick={() => setOpenMore(!openMore)} />
-					<EditTwoToneIcon />
-					<DeleteForeverTwoToneIcon />
+					<Tooltip title="View Classes">
+						<IconButton
+							sx={{ color: "black !important" }}
+							onClick={() => setOpenMore(!openMore)}
+						>
+							<VisibilityTwoToneIcon />
+						</IconButton>
+					</Tooltip>
+					<Tooltip title="Edit Student">
+						<IconButton sx={{ color: "#817737 !important" }}>
+							<EditTwoToneIcon />
+						</IconButton>
+					</Tooltip>
+					<Tooltip title="Delete Student">
+						<IconButton sx={{ color: "#a60000 !important" }}>
+							<DeleteForeverTwoToneIcon />
+						</IconButton>
+					</Tooltip>
 				</div>
 			</div>
 			{openMore ? (
-				<div className="class-expanded-row">
+				<div className="student-expanded-row">
 					{classes.map((classItem) => (
 						<ClassItemComponent
 							key={classItem.id}
