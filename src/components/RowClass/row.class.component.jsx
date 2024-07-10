@@ -1,14 +1,20 @@
 import "./row.class.style.css";
 import React, { useState } from "react";
-import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import StudentItemComponent from "../StudentItem/student.item.component";
+import IconButton from "@mui/material/IconButton";
+import PersonAddAlt1TwoToneIcon from "@mui/icons-material/PersonAddAlt1TwoTone";
+import Tooltip from "@mui/material/Tooltip";
 
 function RowClassComponent({ classItem }) {
 	const [openMore, setOpenMore] = useState(false);
+
+	const handleAddStudent = () => {
+		console.log("add");
+	};
 
 	return (
 		<>
@@ -34,13 +40,43 @@ function RowClassComponent({ classItem }) {
 					</Typography>
 				</div>
 				<div className="class-actions">
-					<VisibilityTwoToneIcon onClick={() => setOpenMore(!openMore)} />
-					<EditTwoToneIcon />
-					<DeleteForeverTwoToneIcon />
+					<Tooltip title="View Students">
+						<IconButton
+							sx={{ color: "black !important" }}
+							onClick={() => setOpenMore(!openMore)}
+						>
+							<VisibilityTwoToneIcon />
+						</IconButton>
+					</Tooltip>
+					<Tooltip title="Edit Class">
+						<IconButton sx={{ color: "#817737 !important" }}>
+							<EditTwoToneIcon />
+						</IconButton>
+					</Tooltip>
+					<Tooltip title="Delete Class">
+						<IconButton sx={{ color: "#a60000 !important" }}>
+							<DeleteForeverTwoToneIcon />
+						</IconButton>
+					</Tooltip>
 				</div>
 			</div>
 			{openMore ? (
 				<div className="class-expanded-row">
+					<div className="add-button">
+						<div className="add-student-button">
+							<Tooltip title="Add student">
+								<IconButton
+									sx={{ color: "#367225 !important" }}
+									onClick={handleAddStudent}
+								>
+									<PersonAddAlt1TwoToneIcon />
+								</IconButton>
+							</Tooltip>
+						</div>
+						<Typography variant="body1" component="div">
+							Add Student
+						</Typography>
+					</div>
 					{classItem.students.map((student) => (
 						<StudentItemComponent
 							key={student.id}

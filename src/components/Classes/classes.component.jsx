@@ -8,12 +8,17 @@ import {
 import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import RowClassComponent from "../RowClass/row.class.component";
+import Fab from "@mui/material/Fab";
+import Tooltip from "@mui/material/Tooltip";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import CreateClassModalComponent from "../CreateModal/Class/create.class.modal";
 
 function ClassesComponent({ searchQuery }) {
 	const dispatch = useDispatch();
 	const classes = useSelector(selectClasses);
 	const classIsLoading = useSelector(selectClassIsLoading);
 	const [filteredClasses, setFilteredClasses] = useState([]);
+	const [open, setOpen] = useState(false);
 
 	useEffect(() => {
 		dispatch(getClasses());
@@ -22,8 +27,12 @@ function ClassesComponent({ searchQuery }) {
 	useEffect(() => {
 		setFilteredClasses(
 			!classIsLoading
-				? classes.filter((classItem) =>
-						classItem.title.toLowerCase().includes(searchQuery.toLowerCase())
+				? classes.filter(
+						(classItem) =>
+							classItem.title
+								.toLowerCase()
+								.includes(searchQuery.toLowerCase()) ||
+							classItem.code.toLowerCase().includes(searchQuery.toLowerCase())
 				  )
 				: classes
 		);
@@ -70,6 +79,20 @@ function ClassesComponent({ searchQuery }) {
 					))}
 				</>
 			)}
+			<Tooltip title="Add new Class">
+				<Fab
+					sx={{ color: "#367225 !important" }}
+					aria-label="add class"
+					className="add-button-new-class"
+					onClick={() => setOpen(true)}
+				>
+					<AddCircleOutlineIcon />
+				</Fab>
+			</Tooltip>
+			<CreateClassModalComponent
+				open={open}
+				handleClose={() => setOpen(false)}
+			></CreateClassModalComponent>
 		</div>
 	);
 }
