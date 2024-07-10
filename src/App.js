@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
@@ -58,6 +58,14 @@ function App() {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [openStudent, setOpenStudent] = useState(false);
 	const [openClass, setOpenClass] = useState(false);
+
+	useEffect(() => {
+		if (location.pathname === "/students") {
+			setValue(0);
+		} else if (location.pathname === "/classes") {
+			setValue(1);
+		}
+	}, [location]);
 
 	const handleSearch = (query) => {
 		setSearchQuery(query);
