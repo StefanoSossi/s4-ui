@@ -83,7 +83,7 @@ function DeleteStudentModalComponent({
 							},
 						}}
 					>
-						Close
+						Cancel
 					</Button>
 				</div>
 			</Box>

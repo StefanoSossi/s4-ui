@@ -124,7 +124,7 @@ function CreateStudentModalComponent({ open, handleClose }) {
 							},
 						}}
 					>
-						Close
+						Cancel
 					</Button>
 				</div>
 			</Box>

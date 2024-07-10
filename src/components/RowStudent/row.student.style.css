@@ -35,3 +35,8 @@
     background-color: #ffffff70;
     border-radius: 1rem;
 }
+
+.student-expanded-row.single-item {
+    display: flex;
+    justify-content: center;
+}

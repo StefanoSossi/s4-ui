@@ -169,7 +169,7 @@ function CreateClassModalComponent({ open, handleClose }) {
 							},
 						}}
 					>
-						Close
+						Cancel
 					</Button>
 				</div>
 			</Box>

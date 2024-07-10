@@ -148,7 +148,7 @@ function UpdateStudentModalComponent({
 							},
 						}}
 					>
-						Close
+						Cancel
 					</Button>
 				</div>
 			</Box>

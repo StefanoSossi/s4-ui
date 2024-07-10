@@ -64,7 +64,7 @@ function DeleteClassModalComponent({ open, handleClose, classItem }) {
 							},
 						}}
 					>
-						Close
+						Cancel
 					</Button>
 				</div>
 			</Box>

@@ -10,15 +10,13 @@ import PersonAddAlt1TwoToneIcon from "@mui/icons-material/PersonAddAlt1TwoTone";
 import Tooltip from "@mui/material/Tooltip";
 import UpdateClassModalComponent from "../UpdateModal/Class/update.class.modal";
 import DeleteClassModalComponent from "../DeleteModal/Class/delete.class.modal";
+import AddStudentsClassModal from "../AddStudentsToClassModal/add.students.class.modal";
 
 function RowClassComponent({ classItem }) {
 	const [openMore, setOpenMore] = useState(false);
 	const [openUpdateClass, setOpenUpdateClass] = useState(false);
 	const [openDeleteClass, setOpenDeleteClass] = useState(false);
-
-	const handleAddStudent = () => {
-		console.log("add");
-	};
+	const [openAddStudentsClass, setOpenAddStudentsClass] = useState(false);
 
 	return (
 		<>
@@ -71,29 +69,44 @@ function RowClassComponent({ classItem }) {
 				</div>
 			</div>
 			{openMore ? (
-				<div className="class-expanded-row">
+				<div
+					className={`class-expanded-row ${
+						classItem.students.length <= 1 ? "single-item" : ""
+					}`}
+				>
 					<div className="add-button">
 						<div className="add-student-button">
 							<Tooltip title="Add student">
 								<IconButton
 									sx={{ color: "#367225 !important" }}
-									onClick={handleAddStudent}
+									onClick={() => setOpenAddStudentsClass(true)}
 								>
 									<PersonAddAlt1TwoToneIcon />
 								</IconButton>
 							</Tooltip>
 						</div>
-						<Typography variant="body1" component="div">
+						<Typography
+							variant="body1"
+							component="div"
+							onClick={() => setOpenAddStudentsClass(true)}
+						>
 							Add Student
 						</Typography>
 					</div>
-					{classItem.students.map((student) => (
-						<StudentItemComponent
-							key={student.id}
-							student={student}
-							classId={classItem.id}
-						></StudentItemComponent>
-					))}
+					{classItem.students.length === 0 ? (
+						<Typography variant="body1" align="center" component="div">
+							No students found.
+						</Typography>
+					) : (
+						classItem.students.map((student) => (
+							<StudentItemComponent
+								key={student.id}
+								student={student}
+								classId={classItem.id}
+								type={"remove"}
+							></StudentItemComponent>
+						))
+					)}
 				</div>
 			) : (
 				<></>
@@ -108,6 +121,11 @@ function RowClassComponent({ classItem }) {
 				handleClose={() => setOpenDeleteClass(false)}
 				classItem={classItem}
 			></DeleteClassModalComponent>
+			<AddStudentsClassModal
+				open={openAddStudentsClass}
+				handleClose={() => setOpenAddStudentsClass(false)}
+				classItem={classItem}
+			></AddStudentsClassModal>
 		</>
 	);
 }

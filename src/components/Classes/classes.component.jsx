@@ -71,12 +71,18 @@ function ClassesComponent({ searchQuery }) {
 				<p>Loading classes...</p>
 			) : (
 				<>
-					{filteredClasses.map((classItem) => (
-						<RowClassComponent
-							key={classItem.id}
-							classItem={classItem}
-						></RowClassComponent>
-					))}
+					{filteredClasses.length === 0 ? (
+						<Typography variant="body1" align="center" component="div">
+							No classes found.
+						</Typography>
+					) : (
+						filteredClasses.map((classItem) => (
+							<RowClassComponent
+								key={classItem.id}
+								classItem={classItem}
+							></RowClassComponent>
+						))
+					)}
 				</>
 			)}
 			<Tooltip title="Add new Class">

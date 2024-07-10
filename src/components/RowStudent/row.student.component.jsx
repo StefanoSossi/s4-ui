@@ -108,14 +108,24 @@ function RowStudentComponent({ student }) {
 				</div>
 			</div>
 			{openMore ? (
-				<div className="student-expanded-row">
-					{classes.map((classItem) => (
-						<ClassItemComponent
-							key={classItem.id}
-							classItem={classItem}
-							studentId={student.id}
-						></ClassItemComponent>
-					))}
+				<div
+					className={`student-expanded-row ${
+						classes.length <= 1 ? "single-item" : ""
+					}`}
+				>
+					{classes.length === 0 ? (
+						<Typography variant="body1" align="center" component="div">
+							No classes found.
+						</Typography>
+					) : (
+						classes.map((classItem) => (
+							<ClassItemComponent
+								key={classItem.id}
+								classItem={classItem}
+								studentId={student.id}
+							></ClassItemComponent>
+						))
+					)}
 				</div>
 			) : (
 				<></>
