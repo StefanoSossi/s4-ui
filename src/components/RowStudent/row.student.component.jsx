@@ -11,6 +11,7 @@ import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import ClassItemComponent from "../ClassItem/class.item.component";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
+import UpdateStudentModalComponent from "../UpdateModal/Student/update.student.modal";
 
 const SATURATION = 65;
 const getColorFromString = (string = "") => {
@@ -35,6 +36,8 @@ const _getHueFromString = (string = "") => {
 function RowStudentComponent({ student }) {
 	const [openMore, setOpenMore] = useState(false);
 	const dispatch = useDispatch();
+	const [openUpdateStudent, setOpenUpdateStudent] = useState(false);
+
 	const classes = useSelector((state) =>
 		selectClassesByStudentId(state, student.id)
 	);
@@ -85,7 +88,10 @@ function RowStudentComponent({ student }) {
 						</IconButton>
 					</Tooltip>
 					<Tooltip title="Edit Student">
-						<IconButton sx={{ color: "#817737 !important" }}>
+						<IconButton
+							sx={{ color: "#817737 !important" }}
+							onClick={() => setOpenUpdateStudent(true)}
+						>
 							<EditTwoToneIcon />
 						</IconButton>
 					</Tooltip>
@@ -109,6 +115,15 @@ function RowStudentComponent({ student }) {
 			) : (
 				<></>
 			)}
+
+			<UpdateStudentModalComponent
+				open={openUpdateStudent}
+				handleClose={() => setOpenUpdateStudent(false)}
+				student={student}
+				backgroundColor={backgroundColor}
+				fontColor={fontColor}
+				studentAcronyms={studentAcronyms}
+			></UpdateStudentModalComponent>
 		</>
 	);
 }

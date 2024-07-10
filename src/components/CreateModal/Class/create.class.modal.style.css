@@ -1,0 +1,48 @@
+.modal-create-student {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 25rem;
+	background-color: white;
+	box-shadow: 1rem 0.5rem 1rem rgba(0, 0, 0, 0.24);
+	padding: 1rem;
+	border-radius: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+#modal-title{
+	color: black;
+	text-align: center;
+}
+
+#modal-description{
+	color: black;
+}
+
+.buttons-actions{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+    justify-content: center;
+	gap: 2rem;
+}
+
+.input-field{
+	margin: 1rem 0;
+	background-color: #39423e13;
+	width: 100%;
+}
+
+.button-close{
+	color: #a60000 !important;
+	border: 1px solid #a60000 !important;
+	
+}
+
+.button-add{
+	color: #367225 !important;
+	border: 1px solid #367225 !important;
+}
