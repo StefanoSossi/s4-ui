@@ -8,9 +8,13 @@ import StudentItemComponent from "../StudentItem/student.item.component";
 import IconButton from "@mui/material/IconButton";
 import PersonAddAlt1TwoToneIcon from "@mui/icons-material/PersonAddAlt1TwoTone";
 import Tooltip from "@mui/material/Tooltip";
+import UpdateClassModalComponent from "../UpdateModal/Class/update.class.modal";
+import DeleteClassModalComponent from "../DeleteModal/Class/delete.class.modal";
 
 function RowClassComponent({ classItem }) {
 	const [openMore, setOpenMore] = useState(false);
+	const [openUpdateClass, setOpenUpdateClass] = useState(false);
+	const [openDeleteClass, setOpenDeleteClass] = useState(false);
 
 	const handleAddStudent = () => {
 		console.log("add");
@@ -49,12 +53,18 @@ function RowClassComponent({ classItem }) {
 						</IconButton>
 					</Tooltip>
 					<Tooltip title="Edit Class">
-						<IconButton sx={{ color: "#817737 !important" }}>
+						<IconButton
+							sx={{ color: "#817737 !important" }}
+							onClick={() => setOpenUpdateClass(true)}
+						>
 							<EditTwoToneIcon />
 						</IconButton>
 					</Tooltip>
 					<Tooltip title="Delete Class">
-						<IconButton sx={{ color: "#a60000 !important" }}>
+						<IconButton
+							sx={{ color: "#a60000 !important" }}
+							onClick={() => setOpenDeleteClass(true)}
+						>
 							<DeleteForeverTwoToneIcon />
 						</IconButton>
 					</Tooltip>
@@ -88,6 +98,16 @@ function RowClassComponent({ classItem }) {
 			) : (
 				<></>
 			)}
+			<UpdateClassModalComponent
+				open={openUpdateClass}
+				handleClose={() => setOpenUpdateClass(false)}
+				classItem={classItem}
+			></UpdateClassModalComponent>
+			<DeleteClassModalComponent
+				open={openDeleteClass}
+				handleClose={() => setOpenDeleteClass(false)}
+				classItem={classItem}
+			></DeleteClassModalComponent>
 		</>
 	);
 }
