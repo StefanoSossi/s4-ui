@@ -12,6 +12,7 @@ import ClassItemComponent from "../ClassItem/class.item.component";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import UpdateStudentModalComponent from "../UpdateModal/Student/update.student.modal";
+import DeleteStudentModalComponent from "../DeleteModal/Student/delete.student.modal";
 
 const SATURATION = 65;
 const getColorFromString = (string = "") => {
@@ -37,6 +38,7 @@ function RowStudentComponent({ student }) {
 	const [openMore, setOpenMore] = useState(false);
 	const dispatch = useDispatch();
 	const [openUpdateStudent, setOpenUpdateStudent] = useState(false);
+	const [openDeleteStudent, setOpenDeleteStudent] = useState(false);
 
 	const classes = useSelector((state) =>
 		selectClassesByStudentId(state, student.id)
@@ -96,7 +98,10 @@ function RowStudentComponent({ student }) {
 						</IconButton>
 					</Tooltip>
 					<Tooltip title="Delete Student">
-						<IconButton sx={{ color: "#a60000 !important" }}>
+						<IconButton
+							sx={{ color: "#a60000 !important" }}
+							onClick={() => setOpenDeleteStudent(true)}
+						>
 							<DeleteForeverTwoToneIcon />
 						</IconButton>
 					</Tooltip>
@@ -124,6 +129,14 @@ function RowStudentComponent({ student }) {
 				fontColor={fontColor}
 				studentAcronyms={studentAcronyms}
 			></UpdateStudentModalComponent>
+			<DeleteStudentModalComponent
+				open={openDeleteStudent}
+				handleClose={() => setOpenDeleteStudent(false)}
+				student={student}
+				backgroundColor={backgroundColor}
+				fontColor={fontColor}
+				studentAcronyms={studentAcronyms}
+			></DeleteStudentModalComponent>
 		</>
 	);
 }
