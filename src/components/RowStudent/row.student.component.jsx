@@ -8,6 +8,7 @@ import { getClasses } from "../../store/slicers/class.slice";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
+import ClassItemComponent from "../ClassItem/class.item.component";
 
 const SATURATION = 65;
 const getColorFromString = (string = "") => {
@@ -30,7 +31,7 @@ const _getHueFromString = (string = "") => {
 };
 
 function RowStudentComponent({ student }) {
-	const [openMenu, setOpenMenu] = useState(false);
+	const [openMore, setOpenMore] = useState(false);
 	const dispatch = useDispatch();
 	const classes = useSelector((state) =>
 		selectClassesByStudentId(state, student.id)
@@ -48,35 +49,50 @@ function RowStudentComponent({ student }) {
 	const fontColor = getFontColorFromString(fullName);
 
 	return (
-		<div className="student-row">
-			<div className="avatar">
-				<Avatar
-					sx={{
-						backgroundColor,
-						color: fontColor,
-						width: 45,
-						height: 45,
-					}}
-				>
-					{studentAcronyms}
-				</Avatar>
+		<>
+			<div className="student-row">
+				<div className="avatar">
+					<Avatar
+						sx={{
+							backgroundColor,
+							color: fontColor,
+							width: 45,
+							height: 45,
+						}}
+					>
+						{studentAcronyms}
+					</Avatar>
+				</div>
+				<div className="name">
+					<Typography variant="body1" component="div">
+						{fullName}
+					</Typography>
+				</div>
+				<div className="classes-number">
+					<Typography variant="body1" component="div">
+						{classes.length}
+					</Typography>
+				</div>
+				<div className="actions">
+					<VisibilityTwoToneIcon onClick={() => setOpenMore(!openMore)} />
+					<EditTwoToneIcon />
+					<DeleteForeverTwoToneIcon />
+				</div>
 			</div>
-			<div className="name">
-				<Typography variant="body1" component="div">
-					{fullName}
-				</Typography>
-			</div>
-			<div className="classes-number">
-				<Typography variant="body1" component="div">
-					{classes.length}
-				</Typography>
-			</div>
-			<div className="actions">
-				<VisibilityTwoToneIcon />
-				<EditTwoToneIcon />
-				<DeleteForeverTwoToneIcon />
-			</div>
-		</div>
+			{openMore ? (
+				<div className="class-expanded-row">
+					{classes.map((classItem) => (
+						<ClassItemComponent
+							key={classItem.id}
+							classItem={classItem}
+							studentId={student.id}
+						></ClassItemComponent>
+					))}
+				</div>
+			) : (
+				<></>
+			)}
+		</>
 	);
 }
 
