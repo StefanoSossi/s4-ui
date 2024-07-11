@@ -92,7 +92,7 @@ export const addClassToStudent = createAsyncThunk(
 			const response = await axios.post(
 				`${API_URL}/${studentId}/class/${classId}`
 			);
-			dispatch(showSnackbar({ message: "Student added", severity: "success" }));
+			dispatch(showSnackbar({ message: "Class added", severity: "success" }));
 			return response.data;
 		} catch (error) {
 			dispatch(showSnackbar({ message: error.message, severity: "error" }));
@@ -108,9 +108,7 @@ export const removeClassToStudent = createAsyncThunk(
 			const response = await axios.delete(
 				`${API_URL}/${studentId}/class/${classId}`
 			);
-			dispatch(
-				showSnackbar({ message: "Student removed", severity: "success" })
-			);
+			dispatch(showSnackbar({ message: "Class removed", severity: "success" }));
 			return response.data;
 		} catch (error) {
 			dispatch(showSnackbar({ message: error.message, severity: "error" }));

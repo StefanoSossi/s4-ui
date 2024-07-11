@@ -31,7 +31,7 @@ function DeleteClassModalComponent({ open, handleClose, classItem }) {
 					You are deleting :
 				</Typography>
 				<Typography id="modal-title" variant="h6" component="h2">
-					{classItem.title}.
+					{classItem.title} - {classItem.code}
 				</Typography>
 				<Typography id="modal-question" variant="subtitle2" component="h2">
 					Are you sure to proceed?

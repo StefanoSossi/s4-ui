@@ -50,7 +50,7 @@ function DeleteStudentModalComponent({
 					You are deleting :
 				</Typography>
 				<Typography id="modal-title" variant="h6" component="h2">
-					{student.firstName}.
+					{student.firstName} {student.lastName}
 				</Typography>
 				<Typography id="modal-question" variant="subtitle2" component="h2">
 					Are you sure to proceed?
