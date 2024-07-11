@@ -41,7 +41,7 @@ function StudentItemComponent({ student, classId, type }) {
 	const backgroundColor = getColorFromString(fullName);
 	const fontColor = getFontColorFromString(fullName);
 
-	const handleRemoveStudent = () => {
+	const handleActionOnStudent = () => {
 		if (type === "remove") {
 			dispatch(removeStudentOfClass({ classId, studentId: student.id }));
 		} else {
@@ -54,7 +54,7 @@ function StudentItemComponent({ student, classId, type }) {
 			<div className="student-item">
 				<IconButton
 					className="remove-student-button"
-					onClick={handleRemoveStudent}
+					onClick={handleActionOnStudent}
 				>
 					{type === "remove" ? <CloseIcon /> : <AddIcon />}
 				</IconButton>
