@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { environment } from "../../environments/environment";
 import axios from "axios";
+import { showSnackbar } from "./snackbar.slice";
 
 const API_URL = `${environment.S4_API}/api/Students`;
 const initialState = {
@@ -10,87 +11,108 @@ const initialState = {
 	error: null,
 };
 
-export const getStudents = createAsyncThunk("student/getStudents", async () => {
-	try {
-		const response = await axios.get(API_URL);
-		return response.data;
-	} catch (error) {
-		throw error;
+export const getStudents = createAsyncThunk(
+	"student/getStudents",
+	async (_, { dispatch, rejectWithValue }) => {
+		try {
+			const response = await axios.get(API_URL);
+			return response.data;
+		} catch (error) {
+			dispatch(showSnackbar({ message: error.message, severity: "error" }));
+			return rejectWithValue(error.message);
+		}
 	}
-});
+);
 
 export const getStudentById = createAsyncThunk(
 	"student/getStudentById",
-	async (studentId) => {
+	async (studentId, { dispatch, rejectWithValue }) => {
 		try {
 			const response = await axios.get(`${API_URL}/${studentId}`);
 			return response.data;
 		} catch (error) {
-			throw error;
+			dispatch(showSnackbar({ message: error.message, severity: "error" }));
+			return rejectWithValue(error.message);
 		}
 	}
 );
 
 export const createStudent = createAsyncThunk(
 	"student/createStudent",
-	async (student) => {
+	async (student, { dispatch, rejectWithValue }) => {
 		try {
 			const response = await axios.post(API_URL, student);
+			dispatch(
+				showSnackbar({ message: "Student created", severity: "success" })
+			);
 			return response.data;
 		} catch (error) {
-			throw error;
+			dispatch(showSnackbar({ message: error.message, severity: "error" }));
+			return rejectWithValue(error.message);
 		}
 	}
 );
 
 export const updateStudent = createAsyncThunk(
 	"student/updateStudent",
-	async ({ studentId, student }) => {
+	async ({ studentId, student }, { dispatch, rejectWithValue }) => {
 		try {
 			const response = await axios.put(`${API_URL}/${studentId}`, student);
+			dispatch(
+				showSnackbar({ message: "Student updated", severity: "success" })
+			);
 			return response.data;
 		} catch (error) {
-			throw error;
+			dispatch(showSnackbar({ message: error.message, severity: "error" }));
+			return rejectWithValue(error.message);
 		}
 	}
 );
 
 export const deleteStudent = createAsyncThunk(
 	"student/deleteStudent",
-	async (studentId) => {
+	async (studentId, { dispatch, rejectWithValue }) => {
 		try {
 			const response = await axios.delete(`${API_URL}/${studentId}`);
+			dispatch(
+				showSnackbar({ message: "Student deleted", severity: "success" })
+			);
 			return studentId;
 		} catch (error) {
-			throw error;
+			dispatch(showSnackbar({ message: error.message, severity: "error" }));
+			return rejectWithValue(error.message);
 		}
 	}
 );
 
 export const addClassToStudent = createAsyncThunk(
 	"student/addClassToStudent",
-	async ({ studentId, classId }) => {
+	async ({ studentId, classId }, { dispatch, rejectWithValue }) => {
 		try {
 			const response = await axios.post(
 				`${API_URL}/${studentId}/class/${classId}`
 			);
+			dispatch(showSnackbar({ message: "Class added", severity: "success" }));
 			return response.data;
 		} catch (error) {
-			throw error;
+			dispatch(showSnackbar({ message: error.message, severity: "error" }));
+			return rejectWithValue(error.message);
 		}
 	}
 );
 
 export const removeClassToStudent = createAsyncThunk(
 	"student/removeClassToStudent",
-	async ({ studentId, classId }) => {
+	async ({ studentId, classId }, { dispatch, rejectWithValue }) => {
 		try {
 			const response = await axios.delete(
 				`${API_URL}/${studentId}/class/${classId}`
 			);
+			dispatch(showSnackbar({ message: "Class removed", severity: "success" }));
 			return response.data;
 		} catch (error) {
-			throw error;
+			dispatch(showSnackbar({ message: error.message, severity: "error" }));
+			return rejectWithValue(error.message);
 		}
 	}
 );

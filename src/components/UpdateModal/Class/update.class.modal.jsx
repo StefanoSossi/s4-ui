@@ -1,4 +1,4 @@
-import "./create.class.modal.style.css";
+import "./update.class.modal.style.css";
 import { useDispatch } from "react-redux";
 
 import React, { useState } from "react";
@@ -7,18 +7,18 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { createClass } from "../../../store/slicers/class.slice";
+import { updateClass } from "../../../store/slicers/class.slice";
 import { showSnackbar } from "../../../store/slicers/snackbar.slice";
 
-function CreateClassModalComponent({ open, handleClose }) {
+function UpdateClassModalComponent({ open, handleClose, classItem }) {
 	const dispatch = useDispatch();
-	const [title, setTitle] = useState("");
+	const [title, setTitle] = useState(classItem.title);
 	const [titleError, setTitleError] = useState(false);
-	const [code, setCode] = useState("");
+	const [code, setCode] = useState(classItem.code);
 	const [codeError, setCodeError] = useState(false);
-	const [description, setDescription] = useState("");
+	const [description, setDescription] = useState(classItem.description);
 
-	const handleAddClass = () => {
+	const handleUpdateClass = () => {
 		if (!code) {
 			setCodeError(true);
 			dispatch(showSnackbar({ message: "Invalid Code", severity: "warning" }));
@@ -31,7 +31,10 @@ function CreateClassModalComponent({ open, handleClose }) {
 		}
 
 		dispatch(
-			createClass({ code: code, title: title, description: description })
+			updateClass({
+				classId: classItem.id,
+				classItem: { code: code, title: title, description: description },
+			})
 		);
 		handleClose();
 	};
@@ -61,9 +64,9 @@ function CreateClassModalComponent({ open, handleClose }) {
 			aria-labelledby="modal-title"
 			aria-describedby="modal-description"
 		>
-			<Box className="modal-create-class">
+			<Box className="modal-update-class">
 				<Typography id="modal-title" variant="h6" component="h2">
-					Add New Class
+					Update a Class
 				</Typography>
 				<TextField
 					className="input-field"
@@ -149,7 +152,7 @@ function CreateClassModalComponent({ open, handleClose }) {
 						className="button-add"
 						size="medium"
 						variant="contained"
-						onClick={handleAddClass}
+						onClick={handleUpdateClass}
 						sx={{
 							backgroundColor: "#367225 !important",
 							color: "white !important",
@@ -159,7 +162,7 @@ function CreateClassModalComponent({ open, handleClose }) {
 							},
 						}}
 					>
-						Add
+						Update
 					</Button>
 					<Button
 						className="button-close"
@@ -180,4 +183,4 @@ function CreateClassModalComponent({ open, handleClose }) {
 	);
 }
 
-export default CreateClassModalComponent;
+export default UpdateClassModalComponent;

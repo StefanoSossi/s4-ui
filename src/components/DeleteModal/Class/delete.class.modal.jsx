@@ -1,4 +1,4 @@
-import "./delete.student.modal.style.css";
+import "./delete.class.modal.style.css";
 import { useDispatch } from "react-redux";
 
 import React from "react";
@@ -6,21 +6,13 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { deleteStudent } from "../../../store/slicers/student.slice";
-import Avatar from "@mui/material/Avatar";
+import { deleteClass } from "../../../store/slicers/class.slice";
 
-function DeleteStudentModalComponent({
-	open,
-	handleClose,
-	student,
-	backgroundColor,
-	fontColor,
-	studentAcronyms,
-}) {
+function DeleteClassModalComponent({ open, handleClose, classItem }) {
 	const dispatch = useDispatch();
 
-	const handleDeleteStudent = () => {
-		dispatch(deleteStudent(student.id));
+	const handleDeleteClass = () => {
+		dispatch(deleteClass(classItem.id));
 		handleClose();
 	};
 
@@ -31,26 +23,15 @@ function DeleteStudentModalComponent({
 			aria-labelledby="modal-title"
 			aria-describedby="modal-description"
 		>
-			<Box className="modal-delete-student">
+			<Box className="modal-delete-classItem">
 				<Typography id="modal-title" variant="h6" component="h2">
-					Delete a Student
+					Delete a Class
 				</Typography>
-				<Avatar
-					sx={{
-						backgroundColor,
-						color: fontColor,
-						width: 45,
-						height: 45,
-						alignSelf: "center",
-					}}
-				>
-					{studentAcronyms}
-				</Avatar>
 				<Typography variant="subtitle2" component="h2">
 					You are deleting :
 				</Typography>
 				<Typography id="modal-title" variant="h6" component="h2">
-					{student.firstName} {student.lastName}
+					{classItem.title} - {classItem.code}
 				</Typography>
 				<Typography id="modal-question" variant="subtitle2" component="h2">
 					Are you sure to proceed?
@@ -60,7 +41,7 @@ function DeleteStudentModalComponent({
 						className="button-add"
 						size="medium"
 						variant="contained"
-						onClick={handleDeleteStudent}
+						onClick={handleDeleteClass}
 						sx={{
 							backgroundColor: "#367225 !important",
 							color: "white !important",
@@ -91,4 +72,4 @@ function DeleteStudentModalComponent({
 	);
 }
 
-export default DeleteStudentModalComponent;
+export default DeleteClassModalComponent;

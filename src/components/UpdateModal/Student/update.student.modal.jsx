@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { updateStudent } from "../../../store/slicers/student.slice";
 import Avatar from "@mui/material/Avatar";
+import { showSnackbar } from "../../../store/slicers/snackbar.slice";
 
 function UpdateStudentModalComponent({
 	open,
@@ -26,6 +27,9 @@ function UpdateStudentModalComponent({
 	const handleUpdateStudent = () => {
 		if (!firstname) {
 			setFirstnameError(true);
+			dispatch(
+				showSnackbar({ message: "Invalid Firstname", severity: "warning" })
+			);
 			return;
 		}
 		dispatch(
@@ -148,7 +152,7 @@ function UpdateStudentModalComponent({
 							},
 						}}
 					>
-						Close
+						Cancel
 					</Button>
 				</div>
 			</Box>

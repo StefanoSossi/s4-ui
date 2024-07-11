@@ -29,9 +29,45 @@
 
 .class-expanded-row{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    justify-items: start;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1.5fr));
+    gap: 0.5rem;
+    justify-items: center;
+    align-items: center;
     padding: 1rem;
     background-color: #ffffff70;
     border-radius: 1rem;
 }
+
+.add-student-button{
+    border: 1px solid white;
+    border-radius: 3rem;
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+
+.add-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 2rem;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.add-button:hover{
+    background-color: #ffffff70;
+    .add-student-button{
+        border: 1px solid #367225;
+    }
+}
+
+.class-expanded-row.single-item {
+    display: flex;
+    justify-content: center;
+}
+

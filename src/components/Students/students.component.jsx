@@ -59,12 +59,18 @@ function StudentsComponent({ searchQuery }) {
 				<p>Loading students...</p>
 			) : (
 				<>
-					{filteredStudents.map((student) => (
-						<RowStudentComponent
-							student={student}
-							key={student.id}
-						></RowStudentComponent>
-					))}
+					{filteredStudents.length === 0 ? (
+						<Typography variant="body1" align="center" component="div">
+							No students found.
+						</Typography>
+					) : (
+						filteredStudents.map((student) => (
+							<RowStudentComponent
+								student={student}
+								key={student.id}
+							></RowStudentComponent>
+						))
+					)}
 				</>
 			)}
 			<Tooltip title="Add new Student">

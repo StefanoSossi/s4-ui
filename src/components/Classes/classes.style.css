@@ -2,6 +2,7 @@
     margin: 0.5rem 2rem 2rem;
     background: #39423e4a;
     padding: 1rem;
+    border-radius: 1rem;
 }
 
 .class-header{
@@ -35,4 +36,11 @@
     flex: 2;
     display: flex;
     justify-content: space-evenly;
+}
+
+.add-button-new-class {
+	position: fixed !important;
+	bottom: 2rem;
+	right: 2rem;
+	z-index: 100 !important;
 }

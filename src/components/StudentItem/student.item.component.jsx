@@ -5,7 +5,11 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
-import { removeStudentOfClass } from "../../store/slicers/class.slice";
+import {
+	removeStudentOfClass,
+	addStudentToClass,
+} from "../../store/slicers/class.slice";
+import AddIcon from "@mui/icons-material/Add";
 
 const SATURATION = 65;
 const getColorFromString = (string = "") => {
@@ -27,7 +31,7 @@ const _getHueFromString = (string = "") => {
 	return Math.abs(hash % 360);
 };
 
-function StudentItemComponent({ student, classId }) {
+function StudentItemComponent({ student, classId, type }) {
 	const dispatch = useDispatch();
 
 	const studentAcronyms = (
@@ -37,8 +41,12 @@ function StudentItemComponent({ student, classId }) {
 	const backgroundColor = getColorFromString(fullName);
 	const fontColor = getFontColorFromString(fullName);
 
-	const handleRemoveStudent = () => {
-		dispatch(removeStudentOfClass({ classId, studentId: student.id }));
+	const handleActionOnStudent = () => {
+		if (type === "remove") {
+			dispatch(removeStudentOfClass({ classId, studentId: student.id }));
+		} else {
+			dispatch(addStudentToClass({ classId: classId, studentId: student.id }));
+		}
 	};
 
 	return (
@@ -46,9 +54,9 @@ function StudentItemComponent({ student, classId }) {
 			<div className="student-item">
 				<IconButton
 					className="remove-student-button"
-					onClick={handleRemoveStudent}
+					onClick={handleActionOnStudent}
 				>
-					<CloseIcon />
+					{type === "remove" ? <CloseIcon /> : <AddIcon />}
 				</IconButton>
 				<Avatar
 					sx={{

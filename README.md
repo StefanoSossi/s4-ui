@@ -1,6 +1,42 @@
-# Getting Started with Create React App
+# Project Information
+This is a code challange written by Stefano Sossi.
+
+## Pre-requisits
+- ### For Windows Users
+
+**nvm v1.1.9** Download the Installer directly from [nvm](https://github.com/coreybutler/nvm-windows/releases/tag/1.1.9) github project, download nvm-setup.zip and install it.
+
+Installation verification:
+
+```sh
+$ nvm version
+```
+
+Use nvm to install Node.js.
+
+```sh
+$ nvm install 18.18.0
+```
+
+Installation verification (npm 9.8.1):
+
+```sh
+$ nvm use 18.18.0
+$ node --version
+$ npm --version
+```
+### Packages
+
+Install the necessary dependencies by running:
+
+```sh
+$ npm install
+```
+
+## React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 
