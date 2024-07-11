@@ -14,6 +14,13 @@ import {
 import ClassesComponent from "./components/Classes/classes.component";
 import StudentsComponent from "./components/Students/students.component";
 import HeaderComponent from "./components/Header/header.component";
+import IconButton from "@mui/material/IconButton";
+import PersonAddAlt1TwoToneIcon from "@mui/icons-material/PersonAddAlt1TwoTone";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import CreateStudentModalComponent from "./components/CreateModal/Student/create.student.modal";
+import CreateClassModalComponent from "./components/CreateModal/Class/create.class.modal";
 
 function samePageLinkNavigation(event) {
 	if (
@@ -49,6 +56,8 @@ function App() {
 	const [value, setValue] = useState(0);
 	const location = useLocation();
 	const [searchQuery, setSearchQuery] = useState("");
+	const [openStudent, setOpenStudent] = useState(false);
+	const [openClass, setOpenClass] = useState(false);
 
 	const handleSearch = (query) => {
 		setSearchQuery(query);
@@ -85,6 +94,57 @@ function App() {
 						selected={location.pathname === "/classes"}
 					/>
 				</Tabs>
+				<div className="add-new-button">
+					{location.pathname === "/students" ? (
+						<>
+							<div
+								className="add-new-item-button"
+								onClick={() => setOpenStudent(true)}
+							>
+								<Tooltip title="Add student">
+									<IconButton sx={{ color: "#367225 !important" }}>
+										<PersonAddAlt1TwoToneIcon />
+									</IconButton>
+								</Tooltip>
+							</div>
+							<Typography
+								variant="body1"
+								component="div"
+								onClick={() => setOpenStudent(true)}
+							>
+								Add Student
+							</Typography>
+							<CreateStudentModalComponent
+								open={openStudent}
+								handleClose={() => setOpenStudent(false)}
+							></CreateStudentModalComponent>
+						</>
+					) : (
+						<>
+							<div
+								className="add-new-item-button"
+								onClick={() => setOpenClass(true)}
+							>
+								<Tooltip title="Add Class">
+									<IconButton sx={{ color: "#367225 !important" }}>
+										<AddCircleOutlineIcon />
+									</IconButton>
+								</Tooltip>
+							</div>
+							<Typography
+								variant="body1"
+								component="div"
+								onClick={() => setOpenClass(true)}
+							>
+								Add Class
+							</Typography>
+							<CreateClassModalComponent
+								open={openClass}
+								handleClose={() => setOpenClass(false)}
+							></CreateClassModalComponent>
+						</>
+					)}
+				</div>
 			</Box>
 			<Routes>
 				<Route path="/" element={<Navigate to="/students" />} />

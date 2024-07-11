@@ -9,6 +9,10 @@ import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import ClassItemComponent from "../ClassItem/class.item.component";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import UpdateStudentModalComponent from "../UpdateModal/Student/update.student.modal";
+import DeleteStudentModalComponent from "../DeleteModal/Student/delete.student.modal";
 
 const SATURATION = 65;
 const getColorFromString = (string = "") => {
@@ -33,6 +37,9 @@ const _getHueFromString = (string = "") => {
 function RowStudentComponent({ student }) {
 	const [openMore, setOpenMore] = useState(false);
 	const dispatch = useDispatch();
+	const [openUpdateStudent, setOpenUpdateStudent] = useState(false);
+	const [openDeleteStudent, setOpenDeleteStudent] = useState(false);
+
 	const classes = useSelector((state) =>
 		selectClassesByStudentId(state, student.id)
 	);
@@ -74,13 +81,34 @@ function RowStudentComponent({ student }) {
 					</Typography>
 				</div>
 				<div className="actions">
-					<VisibilityTwoToneIcon onClick={() => setOpenMore(!openMore)} />
-					<EditTwoToneIcon />
-					<DeleteForeverTwoToneIcon />
+					<Tooltip title="View Classes">
+						<IconButton
+							sx={{ color: "black !important" }}
+							onClick={() => setOpenMore(!openMore)}
+						>
+							<VisibilityTwoToneIcon />
+						</IconButton>
+					</Tooltip>
+					<Tooltip title="Edit Student">
+						<IconButton
+							sx={{ color: "#817737 !important" }}
+							onClick={() => setOpenUpdateStudent(true)}
+						>
+							<EditTwoToneIcon />
+						</IconButton>
+					</Tooltip>
+					<Tooltip title="Delete Student">
+						<IconButton
+							sx={{ color: "#a60000 !important" }}
+							onClick={() => setOpenDeleteStudent(true)}
+						>
+							<DeleteForeverTwoToneIcon />
+						</IconButton>
+					</Tooltip>
 				</div>
 			</div>
 			{openMore ? (
-				<div className="class-expanded-row">
+				<div className="student-expanded-row">
 					{classes.map((classItem) => (
 						<ClassItemComponent
 							key={classItem.id}
@@ -92,6 +120,23 @@ function RowStudentComponent({ student }) {
 			) : (
 				<></>
 			)}
+
+			<UpdateStudentModalComponent
+				open={openUpdateStudent}
+				handleClose={() => setOpenUpdateStudent(false)}
+				student={student}
+				backgroundColor={backgroundColor}
+				fontColor={fontColor}
+				studentAcronyms={studentAcronyms}
+			></UpdateStudentModalComponent>
+			<DeleteStudentModalComponent
+				open={openDeleteStudent}
+				handleClose={() => setOpenDeleteStudent(false)}
+				student={student}
+				backgroundColor={backgroundColor}
+				fontColor={fontColor}
+				studentAcronyms={studentAcronyms}
+			></DeleteStudentModalComponent>
 		</>
 	);
 }

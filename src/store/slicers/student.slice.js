@@ -159,7 +159,7 @@ const classSlice = createSlice({
 			})
 			.addCase(deleteStudent.fulfilled, (state, action) => {
 				state.students = state.students.filter(
-					(student) => student.id !== action.payload.data
+					(student) => student.id !== action.payload
 				);
 				state.isLoading = false;
 			})

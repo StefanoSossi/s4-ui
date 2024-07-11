@@ -56,6 +56,7 @@ function StudentItemComponent({ student, classId }) {
 						color: fontColor,
 						width: 45,
 						height: 45,
+						marginRight: 1,
 					}}
 				>
 					{studentAcronyms}
