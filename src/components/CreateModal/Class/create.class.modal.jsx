@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { createClass } from "../../../store/slicers/class.slice";
+import { showSnackbar } from "../../../store/slicers/snackbar.slice";
 
 function CreateClassModalComponent({ open, handleClose }) {
 	const dispatch = useDispatch();
@@ -18,12 +19,14 @@ function CreateClassModalComponent({ open, handleClose }) {
 	const [description, setDescription] = useState("");
 
 	const handleAddClass = () => {
-		if (!title) {
-			setTitleError(true);
-			return;
-		}
 		if (!code) {
 			setCodeError(true);
+			dispatch(showSnackbar({ message: "Invalid Code", severity: "warning" }));
+			return;
+		}
+		if (!title) {
+			setTitleError(true);
+			dispatch(showSnackbar({ message: "Invalid Title", severity: "warning" }));
 			return;
 		}
 

@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { createStudent } from "../../../store/slicers/student.slice";
+import { showSnackbar } from "../../../store/slicers/snackbar.slice";
 
 function CreateStudentModalComponent({ open, handleClose }) {
 	const dispatch = useDispatch();
@@ -18,6 +19,9 @@ function CreateStudentModalComponent({ open, handleClose }) {
 	const handleAddStudent = () => {
 		if (!firstname) {
 			setFirstnameError(true);
+			dispatch(
+				showSnackbar({ message: "Invalid Firstname", severity: "warning" })
+			);
 			return;
 		}
 		dispatch(createStudent({ firstName: firstname, lastName: lastname }));
