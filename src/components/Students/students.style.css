@@ -1,0 +1,32 @@
+.students{
+    margin: 0.5rem 2rem 2rem;
+    background: #39423e4a;
+    padding: 1rem;
+}
+
+.student-header{
+    background: #39423e;
+    padding: 1rem;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.5rem;
+}
+
+.avatar{
+    flex: 0.5;
+}
+.name{
+    flex: 2;
+    text-align: start;
+}
+.classes-number{
+    flex: 1;
+}
+.actions{
+    flex: 2;
+    display: flex;
+    justify-content: space-evenly;
+}

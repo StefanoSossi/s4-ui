@@ -1,0 +1,20 @@
+.class-item{
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid white;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+.class-item:hover{
+    border: 1px solid #39423e;
+}
+.class-item-title{
+    color: black;
+}
+
+.remove-class-button {
+    right: 8px;
+}

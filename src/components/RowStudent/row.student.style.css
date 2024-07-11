@@ -1,0 +1,26 @@
+.student-row{
+    background: #39423e13;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #39423e;
+}
+
+.avatar{
+    flex: 0.5;
+}
+.name{
+    flex: 2;
+    text-align: start;
+}
+.classes-number{
+    flex: 1;
+
+}
+.actions{
+    flex: 2;
+    display: flex;
+    justify-content: space-evenly;
+}

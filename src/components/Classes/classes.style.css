@@ -1,0 +1,38 @@
+.classes{
+    margin: 0.5rem 2rem 2rem;
+    background: #39423e4a;
+    padding: 1rem;
+}
+
+.class-header{
+    background: #39423e;
+    padding: 1rem;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.5rem;
+}
+
+.class-code{
+    flex: 1;
+    text-align: start;
+}
+.class-title{
+    flex: 1;
+    text-align: start;
+}
+.class-students-number{
+    flex: 1;
+
+}
+.class-description{
+    flex: 2;
+    text-align: start;
+}
+.class-actions{
+    flex: 2;
+    display: flex;
+    justify-content: space-evenly;
+}

@@ -1,0 +1,20 @@
+.student-item{
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid white;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+.student-item:hover{
+    border: 1px solid #39423e;
+}
+.student-name{
+    color: black;
+}
+
+.remove-student-button {
+    right: 8px;
+}

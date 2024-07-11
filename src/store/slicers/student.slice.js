@@ -5,15 +5,14 @@ import axios from "axios";
 
 const API_URL = `${environment.S4_API}/api/Students`;
 const initialState = {
-	isLoading: false,
-	classes: [],
+	isLoading: true,
+	students: [],
 	error: null,
 };
 
-export const getStudents = createAsyncThunk("class/getStudents", async () => {
+export const getStudents = createAsyncThunk("student/getStudents", async () => {
 	try {
 		const response = await axios.get(API_URL);
-		console.log("students ", response.data);
 		return response.data;
 	} catch (error) {
 		throw error;
@@ -21,7 +20,7 @@ export const getStudents = createAsyncThunk("class/getStudents", async () => {
 });
 
 export const getStudentById = createAsyncThunk(
-	"class/getStudentById",
+	"student/getStudentById",
 	async (studentId) => {
 		try {
 			const response = await axios.get(`${API_URL}/${studentId}`);
@@ -33,7 +32,7 @@ export const getStudentById = createAsyncThunk(
 );
 
 export const createStudent = createAsyncThunk(
-	"class/createStudent",
+	"student/createStudent",
 	async (student) => {
 		try {
 			const response = await axios.post(API_URL, student);
@@ -45,7 +44,7 @@ export const createStudent = createAsyncThunk(
 );
 
 export const updateStudent = createAsyncThunk(
-	"class/updateStudent",
+	"student/updateStudent",
 	async ({ studentId, student }) => {
 		try {
 			const response = await axios.put(`${API_URL}/${studentId}`, student);
@@ -57,7 +56,7 @@ export const updateStudent = createAsyncThunk(
 );
 
 export const deleteStudent = createAsyncThunk(
-	"class/deleteStudent",
+	"student/deleteStudent",
 	async (studentId) => {
 		try {
 			const response = await axios.delete(`${API_URL}/${studentId}`);
@@ -69,7 +68,7 @@ export const deleteStudent = createAsyncThunk(
 );
 
 export const addClassToStudent = createAsyncThunk(
-	"class/addClassToStudent",
+	"student/addClassToStudent",
 	async ({ studentId, classId }) => {
 		try {
 			const response = await axios.post(
@@ -83,7 +82,7 @@ export const addClassToStudent = createAsyncThunk(
 );
 
 export const removeClassToStudent = createAsyncThunk(
-	"class/removeClassToStudent",
+	"student/removeClassToStudent",
 	async ({ studentId, classId }) => {
 		try {
 			const response = await axios.delete(
@@ -107,8 +106,7 @@ const classSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(getStudents.fulfilled, (state, action) => {
-				console.log("action", action.payload.data);
-				state.classes = action.payload.data;
+				state.students = action.payload.data;
 				state.isLoading = false;
 			})
 			.addCase(getStudents.rejected, (state, action) => {
@@ -120,7 +118,7 @@ const classSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(getStudentById.fulfilled, (state, action) => {
-				state.classes = state.classes.map((student) =>
+				state.students = state.students.map((student) =>
 					student.id === action.payload.data.id ? action.payload.data : student
 				);
 				state.isLoading = false;
@@ -134,7 +132,7 @@ const classSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(createStudent.fulfilled, (state, action) => {
-				state.classes = [...state.classes, action.payload.data];
+				state.students = [...state.students, action.payload.data];
 				state.isLoading = false;
 			})
 			.addCase(createStudent.rejected, (state, action) => {
@@ -146,7 +144,7 @@ const classSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(updateStudent.fulfilled, (state, action) => {
-				state.classes = state.classes.map((student) =>
+				state.students = state.students.map((student) =>
 					student.id === action.payload.data.id ? action.payload.data : student
 				);
 				state.isLoading = false;
@@ -160,7 +158,7 @@ const classSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(deleteStudent.fulfilled, (state, action) => {
-				state.classes = state.classes.filter(
+				state.students = state.students.filter(
 					(student) => student.id !== action.payload.data
 				);
 				state.isLoading = false;
@@ -174,7 +172,7 @@ const classSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(addClassToStudent.fulfilled, (state, action) => {
-				state.classes = state.classes.map((student) =>
+				state.students = state.students.map((student) =>
 					student.id === action.payload.data.id ? action.payload.data : student
 				);
 				state.isLoading = false;
@@ -188,7 +186,7 @@ const classSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(removeClassToStudent.fulfilled, (state, action) => {
-				state.classes = state.classes.map((student) =>
+				state.students = state.students.map((student) =>
 					student.id === action.payload.data.id ? action.payload.data : student
 				);
 				state.isLoading = false;
@@ -203,7 +201,7 @@ const classSlice = createSlice({
 
 export const selectStudentState = (state) => state.student;
 
-export const selectStudents = (state) => selectStudentState(state).classes;
+export const selectStudents = (state) => selectStudentState(state).students;
 
 export const selectStudentIsLoading = (state) =>
 	selectStudentState(state).isLoading;

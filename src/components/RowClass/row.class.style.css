@@ -1,0 +1,37 @@
+.class-row{
+    background: #39423e13;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #39423e;
+}
+
+.class-code{
+    flex: 1;
+}
+.class-title{
+    flex: 1;
+    text-align: start;
+}
+.class-description{
+    flex: 2;
+}
+.class-students-number{
+    flex: 1;
+}
+.class-actions{
+    flex: 2;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.class-expanded-row{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-items: start;
+    padding: 1rem;
+    background-color: #ffffff70;
+    border-radius: 1rem;
+}
